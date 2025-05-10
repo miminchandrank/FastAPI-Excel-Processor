@@ -105,16 +105,6 @@ To import:
 * Paste or upload `postman.json`
 * Set base URL to `http://localhost:9090`
 
----
-
-## 💡 Your Insights
-
-### ↻ Potential Improvements
-
-* Add support for `.xlsx` and `.csv` formats.
-* Implement file upload endpoint for dynamic file handling.
-* Add support for aggregations (mean, median, etc.).
-* Provide a simple frontend UI using React or Streamlit.
 
 ### ⚠️ Missed Edge Cases
 
@@ -139,13 +129,4 @@ Endpoints:
 
 ## 📝 Author
 
-Developed by \[Your Name]
-As part of the FastAPI Excel Processor Assignment
-
----
-
-## 🗓️ Deadline
-
-**May 10, EOD**
-
-Make sure your repository is public and submitted via the provided form.
+Developed by - Miminchandran K
