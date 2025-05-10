@@ -1,30 +1,42 @@
-Here's a professional README.md file that exactly follows your assignment requirements:
+# 📊 FastAPI Excel Processor
 
-markdown
-# FastAPI Excel Processor
+This FastAPI project allows users to process an Excel file (`capbudg.xls`) and interact with its contents through a set of API endpoints. The application supports table listing, row extraction, and numerical summation for specified rows.
 
-## Overview
-This FastAPI application processes Excel data from `capbudg.xls`, providing endpoints to explore tables and calculate row sums. The project demonstrates API development skills with proper error handling and documentation.
+---
 
-## API Endpoints
+## 🚀 Project Overview
+
+This API is built using **FastAPI** and is designed to:
+
+1. **Read and parse** data from a given Excel file.
+2. **Expose API endpoints** to list tables, show row details, and compute row-wise numerical sums.
+
 Base URL: `http://localhost:9090`
 
-### 1. List Tables
-**Endpoint**: `GET /list_tables`  
-**Response**:
-```json
+
+
+Run the API server
+uvicorn main:app --host 127.0.0.1 --port 9090
+
+✅ GET /list_tables
+Returns the names of all sheets (treated as "tables") in the Excel file.
+Response:
+
 {
-  "tables": ["Initial Investment", "Revenue Projections", "Operating Expenses"]
+  "tables": [
+    "Initial Investment",
+    "Revenue Projections",
+    "Operating Expenses"
+  ]
 }
-2. Get Table Details
-Endpoint: GET /get_table_details
-Parameters:
 
-table_name (string): Name of the Excel sheet
+✅ GET /get_table_details?table_name={name}
+Returns the list of row names (first column values) from a given sheet.
 
-Example Response:
+Example Request:
+GET /get_table_details?table_name=Initial Investment
+Response:
 
-json
 {
   "table_name": "Initial Investment",
   "row_names": [
@@ -37,134 +49,69 @@ json
     "Other invest.(non-depreciable)="
   ]
 }
-3. Calculate Row Sum
-Endpoint: GET /row_sum
-Parameters:
 
-table_name (string): Sheet name
+✅ GET /row_sum?table_name={name}&row_name={row}
+Calculates and returns the sum of all numeric values in the given row.
 
-row_name (string): Target row name
+Example Request:
+GET /row_sum?table_name=Initial Investment&row_name=Tax Credit (if any )=
 
-Implementation Note:
-Only numerical values are summed (units like '%' are stripped before calculation)
-
-Example Response:
-
-json
+Response:
 {
   "table_name": "Initial Investment",
   "row_name": "Tax Credit (if any )=",
-  "sum": 10
+  "sum": 10.0
 }
-Installation
-bash
-# Clone repository
-git clone https://github.com/yourusername/fastapi-excel-processor.git
-cd fastapi-excel-processor
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-.\venv\Scripts\activate   # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Ensure Excel file is in place
-mkdir -p app/Data
-cp path/to/capbudg.xls app/Data/
-Running the Application
-bash
-uvicorn app.main:app --host 0.0.0.0 --port 9090 --reload
-Access interactive docs: http://localhost:9090/docs
-
-Testing
-Postman Collection
-Import the provided Postman Collection containing all endpoints.
-
-cURL Examples
-bash
-# List tables
-curl http://localhost:9090/list_tables
-
-# Get table details
-curl "http://localhost:9090/get_table_details?table_name=Initial%20Investment"
-
-# Calculate row sum
-curl "http://localhost:9090/row_sum?table_name=Initial%20Investment&row_name=Tax%20Credit%20(if%20any%20)="
-Evaluation Criteria
-Problem-Solving
-Implemented all required endpoints with proper Excel parsing
-
-Handled numerical calculations with unit stripping
-
-Robust error handling for invalid inputs
-
-Coding Style
-Modular architecture (separate routes and Excel processor)
-
-Proper docstrings and type hints
-
-PEP-8 compliance
-
-Documentation
-Complete API documentation in README
-
-Interactive Swagger docs
-
-Postman collection for testing
-
-Your Insights
-Potential Improvements
-Add file upload endpoint for dynamic Excel processing
-
-Support for .xlsx and CSV formats
-
-Implement authentication (JWT/OAuth2)
-
-Dockerize application for easy deployment
-
-Add async processing for large files
-
-Missed Edge Cases
-Excel files with password protection
-
-Sheets with merged cells
-
-Files containing macros
-
-Non-ASCII characters in sheet names
-
-Extremely large datasets (>1M rows)
-
-Dependencies
-Python 3.10+
-
-FastAPI 0.109.1
-
-Pandas 2.2.0
-
-openpyxl 3.1.2
-
-xlrd 2.0.1 (for .xls support)
-
-License
-MIT License
 
 
-Key features:
-1. Follows all assignment requirements precisely
-2. Clear endpoint documentation with examples
-3. Complete installation and usage instructions
-4. Includes evaluation criteria alignment
-5. Your insights section with improvements and edge cases
-6. Professional formatting for GitHub
 
-To use:
-1. Copy this entire content
-2. Create/paste into `README.md`
-3. Add your Postman collection JSON file
-4. Update the GitHub repo link
-5. Commit to your repository
 
-The markdown will render perfectly on GitHub with proper code blocks and section organization.
+🧪 Postman Collection
+A ready-to-use Postman collection is included in the repo to test the API endpoints.
+
+To import:
+
+Open Postman
+
+Click on Import
+
+Paste or upload postman.json
+
+Set base URL to http://localhost:9090
+
+
+
+
+💡 Your Insights
+🔁 Potential Improvements
+Add support for .xlsx and .csv formats.
+
+Implement file upload endpoint for dynamic file handling.
+
+Add support for aggregations (mean, median, etc.).
+
+Provide a simple frontend UI using React or Streamlit.
+
+⚠️ Missed Edge Cases
+Empty sheets with no data.
+
+Tables where all values are non-numeric (returns an error).
+
+Row names with invisible whitespaces or encoding issues.
+
+Malformed Excel file structure.
+
+
+✅ Testing
+Postman base URL: http://localhost:9090
+
+Endpoints:
+
+/list_tables
+
+/get_table_details?table_name=...
+
+/row_sum?table_name=...&row_name=...
+
+
+
